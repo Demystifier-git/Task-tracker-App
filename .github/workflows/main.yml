@@ -17,10 +17,11 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Backend Image
-        run: docker build -t taskapp-backend ./Backend
+        run: docker build -f ./backend/Dockerfile.backend -t taskapp-backend ./backend
+
 
       - name: Build Frontend Image
-        run: docker build -t taskapp-frontend ./frontend
+        run: docker build -f ./frontend/Dockerfile.frontend -t taskapp-frontend ./frontend
 
       - name: Run Docker Compose
         run: docker-compose up -d --build
