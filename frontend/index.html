@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Tracker</title>
+</head>
+<body>
+  <h1>Task Tracker</h1>
+  <ul id="task-list"></ul>
+  <form id="task-form">
+    <input type="text" id="new-task" placeholder="Enter new task" required />
+    <button type="submit">Add Task</button>
+  </form>
+  <script>
+    document.getElementById('task-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const taskText = document.getElementById('new-task').value;
+    fetch('/api/tasks')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('task-list');
+        data.forEach(task => {
+          const li = document.createElement('li');
+          li.textContent = `${task.id}: ${task.task}`;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>

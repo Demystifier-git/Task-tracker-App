@@ -1,0 +1,64 @@
+🚀 Task Tracker App – CI/CD Pipeline (DevOps Assessment) 📋 Overview This project showcases a complete DevOps pipeline implementation for a Task Tracker Application, encompassing containerization, orchestration, CI/CD setup, and deployment to a cloud environment. Additionally, it features optional monitoring and environment segregation for staging and production.
+
+🧰 Tech Stack Frontend: html
+
+Backend: Node.js / Express 
+
+Containerization: Docker
+
+Orchestration: Docker Compose
+
+CI/CD: GitHub Actions
+
+Cloud Provider: AWS ECR and ECS
+
+Monitoring (Bonus): Prometheus + Grafana
+
+📦 Project Structure . ├── backend/ │ └── Dockerfile ├── frontend/ │ └── Dockerfile ├── docker-compose.yml ├── .github/ │ └── workflows/ │ └── ci-cd.yml ├── deploy/ │ └── aws/ │ └── terraform / bash / scripts (if applicable) ├── monitoring/ (Bonus) │ ├── prometheus.yml │ └── grafana/ └── README.md
+
+⚙️ Setup & Implementation
+
+Dockerization Frontend Dockerfile:
+Multi-stage build to optimize image size.
+
+Static files served via Nginx.
+
+Backend Dockerfile:
+
+Node.js base image.
+
+Installs dependencies and starts server.
+
+Docker Compose docker-compose.yml used for local development.
+Defines services: frontend, backend.
+
+Simplifies spinning up the entire stack locally with one command:
+
+bash Copy Edit docker-compose up --build 3. GitHub Actions – CI/CD Workflow defined in .github/workflows/ci-cd.yml.
+
+Steps include:
+
+Checkout code.
+
+Build and test both frontend and backend.
+
+Build Docker images.
+
+Push to Amazon ECR.
+
+Deploy to AWS using ECS.
+
+📝 Sample CI/CD triggers:
+
+
+ECS deployment via Fargate (for managed containers) (or)
+
+
+Secrets and environment variables managed via AWS SSM or GitHub Secrets
+
+🌐 Live Deployment
+
+📊 Monitoring (Bonus) Prometheus collects metrics from backend (exposed at /metrics).
+
+Grafana dashboards visualize API performance, error rates, CPU/memory usage.
+

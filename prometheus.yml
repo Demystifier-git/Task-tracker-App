@@ -1,0 +1,8 @@
+# prometheus.yml
+global:
+  scrape_interval: 15s  # How often Prometheus scrapes the target
+
+scrape_configs:
+  - job_name: 'backend'  # Scraping the backend service
+    static_configs:
+      - targets: ['backend:8080']  # Assuming backend is available at port 5000
