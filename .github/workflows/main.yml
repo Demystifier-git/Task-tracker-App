@@ -55,7 +55,7 @@ jobs:
       - name: Build and Push Frontend Image to Public ECR
         run: |
          IMAGE_NAME=public.ecr.aws/${{ secrets.PUBLIC_ECR_ALIAS }}/taskapp-frontend:latest
-         docker build -f ./frontend/Dockerfile.frontend -t taskapp-frontend ./Frontend
+         docker build -f ./frontend/Dockerfile.frontend -t taskapp-frontend ./frontend
          docker tag taskapp-frontend:latest $IMAGE_NAME
          docker push $IMAGE_NAME
 
