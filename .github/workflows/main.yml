@@ -24,7 +24,7 @@ jobs:
         run: docker build -f ./frontend/Dockerfile.frontend -t taskapp-frontend ./frontend
 
       - name: Run Docker Compose
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
 
   deploy:
     needs: build
