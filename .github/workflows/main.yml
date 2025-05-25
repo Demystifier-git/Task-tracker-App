@@ -54,7 +54,7 @@ jobs:
 
       - name: Build and Push Backend Image
         run: |
-          docker build -f ./backend/Dockerfile.backend -t taskapp-backend ./backend
+          docker build -f ./Backend/Dockerfile.backend -t taskapp-backend ./Backend
           docker tag taskapp-backend:latest \
             ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/taskapp-backend:latest
           docker push \
