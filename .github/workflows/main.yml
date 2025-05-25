@@ -52,21 +52,19 @@ jobs:
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin \
           ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
 
-      - name: Build and Push Backend Image
+      - name: Build and Push Backend Image to Public ECR
         run: |
+          IMAGE_NAME=public.ecr.aws/${{ secrets.PUBLIC_ECR_ALIAS }}/taskapp-backend:latest
           docker build -f ./Backend/Dockerfile.backend -t taskapp-backend ./Backend
-          docker tag taskapp-backend:latest \
-            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/taskapp-backend:latest
-          docker push \
-            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/taskapp-backend:latest
+          docker tag taskapp-backend:latest $IMAGE_NAME
+          docker push $IMAGE_NAME
 
-      - name: Build and Push Frontend Image
+      - name: Build and Push Frontend Image to Public ECR
         run: |
-          docker build -f ./frontend/Dockerfile.frontend -t taskapp-frontend ./frontend
-          docker tag taskapp-frontend:latest \
-            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/taskapp-frontend:latest
-          docker push \
-            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/taskapp-frontend:latest
+         IMAGE_NAME=public.ecr.aws/${{ secrets.PUBLIC_ECR_ALIAS }}/taskapp-frontend:latest
+         docker build -f ./Frontend/Dockerfile.frontend -t taskapp-frontend ./Frontend
+         docker tag taskapp-frontend:latest $IMAGE_NAME
+         docker push $IMAGE_NAME
 
 
       - name: Deploy to ECS
